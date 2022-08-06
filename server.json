@@ -4,17 +4,35 @@
       "id": 1,
       "content": "my first post at posterr!!!",
       "author": {
-        "name": "Lucas Santos",
-        "userName": "@lucassms9"
+        "id": 1,
+        "name": "Joao Silva",
+        "userName": "@joao123"
       },
       "isReposted": false,
       "postParent": {
         "content": "my first post at posterr!!!",
         "author": {
-          "name": "Lucas Santos",
+          "name": "Lucas Mendonça",
           "userName": "@lucassms9"
         }
       }
+    },
+    {
+      "id": 2,
+      "content": "",
+      "author": {
+        "id": 2,
+        "name": "Carlos Nascimento",
+        "userName": "@carlos10"
+      },
+      "postParent": {
+        "content": "my first post at posterr!!!",
+        "author": {
+          "name": "Lucas Mendonça",
+          "userName": "@lucassms9"
+        }
+      },
+      "isReposted": true
     }
   ],
   "profile": [
@@ -39,7 +57,7 @@
     {
       "id": 4,
       "joinedAt": "2021-05-25",
-      "name": "Lucas Mendonca",
+      "name": "Lucas Mendonça",
       "userName": "@lucassms9"
     }
   ]

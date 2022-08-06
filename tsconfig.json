@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     /* Module Resolution Options */
@@ -12,7 +12,9 @@
       "@routes/*": ["src/routes/*"],
       "@screens/*": ["src/screens/*"],
       "@styles/*": ["src/styles/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@services/*": ["src/services/*"],
+      "@store/*": ["src/store/*"],
     }
   },
 
