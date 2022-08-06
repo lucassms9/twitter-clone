@@ -10,5 +10,5 @@ export const theme = {
       disabled: 'rgba(255, 255, 255, 0.3)'
     },
     divider: 'rgba(255, 255, 255, 0.12)'
-  }
+  },
 };
