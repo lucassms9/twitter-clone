@@ -1,36 +1,22 @@
+import React, { useEffect } from 'react';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
-import React from 'react';
+
 import { Text, View } from 'react-native';
 import Post from '@components/Post';
 import { Container } from './styles';
-const Home = () => {
-  const DATA = [
-    {
-      title: 'First Item'
-    },
-    {
-      title: 'Second Item'
-    },
-    {
-      title: 'Second Item'
-    },
-    {
-      title: 'Second Item'
-    },
-    {
-      title: 'Second Item'
-    },
-    {
-      title: 'Second Item'
-    }
-  ];
+import useUser from '@store/user';
+import { usePosts } from '@services/client';
+import { Post as IPost } from '@services/client/types';
 
-  const renderItem = ({ item }: ListRenderItemInfo<{ title: string }>) => {
-    return <Post />;
+const Home = () => {
+  const { data } = usePosts();
+
+  const renderItem = ({ item }: ListRenderItemInfo<IPost>) => {
+    return <Post post={item} />;
   };
   return (
     <Container>
-      <FlashList data={DATA} renderItem={renderItem} estimatedItemSize={200} />
+      <FlashList data={data?.reverse()} renderItem={renderItem} estimatedItemSize={200} />
     </Container>
   );
 };
