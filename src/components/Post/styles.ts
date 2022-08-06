@@ -15,14 +15,7 @@ export const ContentRePost = styled.View`
 export const ContainerUserName = styled.View`
   flex-direction: row;
 `;
-export const ContainerQuote = styled.View`
-  margin-left: 16px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: ${({ theme }) => theme.colors.divider};
-  padding: 10px;
-  border-radius: 12px;
-`;
+
 export const Footer = styled.View`
   flex-direction: row;
   justify-content: flex-end;
