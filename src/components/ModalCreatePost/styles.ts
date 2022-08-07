@@ -14,6 +14,16 @@ export const Title = styled.Text`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.text.primary};
 `;
+export const ContentCount = styled.View`
+  align-items: flex-end;
+  margin-bottom: 12px;
+`;
+export const TextCount = styled.Text`
+  align-items: flex-end;
+  color: ${({ theme }) => theme.colors.text.disabled};
+  margin-bottom: 12px;
+  font-size:14px;
+`;
 
 export const Input = styled.TextInput`
   background-color: ${({ theme }) => theme.colors.background};

@@ -24,7 +24,7 @@ const Home = () => {
     <Container>
       <FlashList data={memoPosts} renderItem={renderItem} estimatedItemSize={200} />
       <FloatingButton onPress={() => setShowModal((prev) => !prev)} />
-      <ModalCreatePost isVisible={showModal} onPress={() => setShowModal((prev) => !prev)} />
+      <ModalCreatePost isVisible={showModal} onClose={() => setShowModal((prev) => !prev)} />
     </Container>
   );
 };

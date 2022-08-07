@@ -9,13 +9,6 @@
         "userName": "@joao123"
       },
       "isReposted": false,
-      "postParent": {
-        "content": "my first post at posterr!!!",
-        "author": {
-          "name": "Lucas Mendonça",
-          "userName": "@lucassms9"
-        }
-      },
       "createdAt": 1659886706634
     },
     {
@@ -27,156 +20,117 @@
         "userName": "@carlos10"
       },
       "postParent": {
+        "id": 1,
         "content": "my first post at posterr!!!",
         "author": {
-          "name": "Lucas Mendonça",
-          "userName": "@lucassms9"
-        }
+          "id": 1,
+          "name": "Joao Silva",
+          "userName": "@joao123"
+        },
+        "isReposted": false,
+        "createdAt": 1659886706634
       },
       "isReposted": true,
       "createdAt": 1659886706635
     },
     {
-      "id": "a31faece-4039-434b-8f6d-8d20e31624e1",
-      "content": "Teste",
-      "isReposted": false,
-      "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
-      },
-      "createdAt": 1659886973003
-    },
-    {
-      "id": "f459d5dc-3fe1-48f1-8b54-5b1d6abdedb0",
-      "content": "Teste 2",
-      "isReposted": false,
-      "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
-      },
-      "createdAt": 1659887035367
-    },
-    {
-      "id": "2933e2a5-c697-4dac-bc24-a7bfab26c5da",
-      "content": "Teste 3",
-      "isReposted": false,
-      "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
-      },
-      "createdAt": 1659887039334
-    },
-    {
-      "id": "2c3d8481-7701-413a-bfd7-3ac2698818d4",
+      "id": "6a155561-a6a2-4a97-806b-7ffe72a50a5d",
       "isReposted": true,
       "content": "",
       "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
       },
+      "createdAt": 1659890821511,
       "postParent": {
-        "content": "Teste",
-        "author": {
-          "id": 1,
-          "name": "Joao Silva",
-          "userName": "@joao123"
-        }
-      },
-      "createdAt": 1659887044872
-    },
-    {
-      "id": "7d6170c7-19f9-4be7-afbf-0841531e675f",
-      "content": "Teste quote",
-      "isReposted": false,
-      "author": {
         "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
-      },
-      "createdAt": 1659887052881,
-      "postParent": {
-        "id": "2c3d8481-7701-413a-bfd7-3ac2698818d4",
-        "isReposted": true,
-        "content": "",
+        "content": "my first post at posterr!!!",
         "author": {
           "id": 1,
           "name": "Joao Silva",
           "userName": "@joao123"
         },
+        "isReposted": false,
+        "createdAt": 1659886706634
+      }
+    },
+    {
+      "id": "7dce61ed-fcfc-4aa1-a6c0-658b4bebf5f9",
+      "content": "Test quote from repost",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659890836834,
+      "postParent": {
+        "id": 2,
+        "content": "",
+        "author": {
+          "id": 2,
+          "name": "Carlos Nascimento",
+          "userName": "@carlos10"
+        },
         "postParent": {
-          "content": "Teste",
+          "id": 1,
+          "content": "my first post at posterr!!!",
           "author": {
             "id": 1,
             "name": "Joao Silva",
             "userName": "@joao123"
-          }
+          },
+          "isReposted": false,
+          "createdAt": 1659886706634
         },
-        "createdAt": 1659887044872
+        "isReposted": true,
+        "createdAt": 1659886706635
       }
     },
     {
-      "id": "6b4c2b58-62d2-4d9d-82af-33ccdaee345e",
-      "isReposted": true,
-      "content": "",
-      "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
-      },
-      "postParent": {
-        "content": "Teste 2",
-        "author": {
-          "id": 1,
-          "name": "Joao Silva",
-          "userName": "@joao123"
-        }
-      },
-      "createdAt": 1659887054765
-    },
-    {
-      "id": "941c3c3c-0e3f-4263-96e9-0228b88bc6ce",
-      "content": "Teste",
+      "id": "eed2ac7c-1118-4e24-906e-fb0249845a1c",
+      "content": "Test post",
       "isReposted": false,
       "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
       },
-      "createdAt": 1659887057786
+      "createdAt": 1659890855634
     },
     {
-      "id": "756417cd-6542-44b8-bc8b-36aa839ce071",
-      "isReposted": true,
-      "content": "",
-      "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
-      },
-      "postParent": {
-        "content": "Teste",
-        "author": {
-          "id": 1,
-          "name": "Joao Silva",
-          "userName": "@joao123"
-        }
-      },
-      "createdAt": 1659887500916
-    },
-    {
-      "id": "635fed5a-cd35-4422-b842-c53933874287",
-      "content": "Teste",
+      "id": "620641c7-1b30-412a-bfb7-2272076f74fe",
+      "content": "Test again",
       "isReposted": false,
       "author": {
-        "id": 1,
-        "name": "Joao Silva",
-        "userName": "@joao123"
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
       },
-      "createdAt": 1659887545048
+      "createdAt": 1659891656498,
+      "postParent": {
+        "id": "6a155561-a6a2-4a97-806b-7ffe72a50a5d",
+        "isReposted": true,
+        "content": "",
+        "author": {
+          "id": 3,
+          "name": "Lucas Mendonça",
+          "userName": "@lucassms9"
+        },
+        "createdAt": 1659890821511,
+        "postParent": {
+          "id": 1,
+          "content": "my first post at posterr!!!",
+          "author": {
+            "id": 1,
+            "name": "Joao Silva",
+            "userName": "@joao123"
+          },
+          "isReposted": false,
+          "createdAt": 1659886706634
+        }
+      }
     }
   ],
   "profile": [

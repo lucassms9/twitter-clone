@@ -4,9 +4,9 @@ import type { State } from './types';
 
 const useUser = create<State>(() => ({
   user: {
-    id: 1,
-    name: 'Joao Silva',
-    userName: '@joao123'
+    id: 3,
+    name: 'Lucas Mendonça',
+    userName: '@lucassms9'
   }
 }));
 

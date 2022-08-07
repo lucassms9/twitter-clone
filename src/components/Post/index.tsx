@@ -20,7 +20,7 @@ import { useOwnerPosts, usePostMutation } from '@services/client';
 import { useQueryClient } from '@tanstack/react-query';
 import useUser from '@store/user';
 import ModalCreatePost from '@components/ModalCreatePost';
-import { getTime, getUnixTime, isAfter, startOfToday } from 'date-fns';
+import { getTime, isAfter, startOfToday } from 'date-fns';
 import { uuid } from '@utils';
 import { Alert } from 'react-native';
 
@@ -45,42 +45,36 @@ const Post = ({ post }: { post: IPost }) => {
     if (postsCreateToday.length > 5) {
       return Alert.alert('Alert!', 'You only can create 5 post per day');
     }
-
-    mutate({
+    const body = {
       id: uuid(),
       isReposted: true,
       content: '',
       author: {
         ...user
       },
-      postParent: {
-        content: post.content,
-        author: {
-          ...post.author
-        }
-      },
       createdAt: getTime(new Date())
-    });
+    } as IPost;
+
+    if (post.isReposted) {
+      body.postParent = post.postParent;
+    } else {
+      body.postParent = post;
+    }
+    mutate(body);
   }, [post, ownerPosts]);
-
-  const openModal = useCallback(() => {
-    setShowModal(true);
-  }, [setShowModal]);
-
-  const quotePost = useCallback(() => {
-    setShowModal(false);
-  }, [post]);
 
   const headerContent = useMemo(() => {
     if (post.isReposted && post.postParent) {
       return {
         name: post.postParent.author.name,
-        userName: post.postParent.author.userName
+        userName: post.postParent.author.userName,
+        id: post.postParent.author.id
       };
     }
     return {
       name: post.author.name,
-      userName: post.author.userName
+      userName: post.author.userName,
+      id: post.author.id
     };
   }, [post]);
 
@@ -101,7 +95,7 @@ const Post = ({ post }: { post: IPost }) => {
       {post.isReposted && post.postParent && <Body>{post.postParent.content}</Body>}
       {post.content && <Body>{post.content}</Body>}
 
-      {post.postParent && !post.isReposted && <PostQuote post={post.postParent} />}
+      <PostQuote post={post} />
 
       <Footer>
         <ItemFooter marginRight={20} onPress={repost}>
@@ -116,7 +110,7 @@ const Post = ({ post }: { post: IPost }) => {
       <ModalCreatePost
         quotePost={post}
         isVisible={showModal}
-        onPress={() => setShowModal((prev) => !prev)}
+        onClose={() => setShowModal((prev) => !prev)}
       />
     </Container>
   );

@@ -7,24 +7,35 @@ import useUser from '@store/user';
 import Modal from 'react-native-modal';
 import { useOwnerPosts, usePostMutation } from '@services/client';
 import { useQueryClient } from '@tanstack/react-query';
-import { Post, PostParent } from '@services/client/types';
+import { Post } from '@services/client/types';
 import { Props } from './types';
-import { Container, Input, Title, Footer, Button, ContainerQuote } from './styles';
+import {
+  Container,
+  Input,
+  Title,
+  Footer,
+  Button,
+  ContainerQuote,
+  ContentCount,
+  TextCount
+} from './styles';
 import { theme } from '@styles/theme';
 import PostQuote from '@components/PostQuote';
 import { uuid } from '@utils';
+import { PostQuoteData } from '@components/PostQuote/types';
 
-export const ModalCreatePost = ({ isVisible, quotePost, onPress }: Props) => {
+const MAX_LENGTH = 777;
+export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const focusRef = createRef<TextInput>();
-  const [text, onChange] = useState('');
+  const [content, setContent] = useState('');
   const user = useUser((state) => state.user);
   const queryClient = useQueryClient();
   const { data: ownerPosts } = useOwnerPosts(user.id);
   const { mutate } = usePostMutation({
     onSuccess: () => {
-      onPress();
+      onClose();
       queryClient.refetchQueries(['posts']);
-      onChange('');
+      setContent('');
     }
   });
 
@@ -43,9 +54,13 @@ export const ModalCreatePost = ({ isVisible, quotePost, onPress }: Props) => {
       return Alert.alert('Alert!', 'You only can create 5 post per day');
     }
 
+    if (content.length > MAX_LENGTH) {
+      return Alert.alert('Alert!', 'Your can have a maximum of 777 characters');
+    }
+
     const body = {
       id: uuid(),
-      content: text,
+      content,
       isReposted: false,
       author: {
         ...user
@@ -59,18 +74,25 @@ export const ModalCreatePost = ({ isVisible, quotePost, onPress }: Props) => {
     }
 
     mutate(body);
-  }, [text, queryClient]);
+  }, [content, queryClient]);
 
   const postParent = useMemo(() => {
-    if (quotePost) {
-      return {
-        author: {
-          ...quotePost.author
-        },
-        content: quotePost.content
-      } as PostParent;
-    }
+    return quotePost || ({} as Post);
   }, [quotePost]);
+
+  const onCancel = useCallback(() => {
+    onClose();
+    setContent('');
+  }, [onClose]);
+
+  const handleOnChangeText = useCallback(
+    (text: string) => {
+      if (text.length <= MAX_LENGTH) {
+        setContent(text);
+      }
+    },
+    [content, setContent]
+  );
 
   return (
     <Modal animationIn='fadeInUp' animationOut={'fadeOutDown'} isVisible={isVisible}>
@@ -83,16 +105,22 @@ export const ModalCreatePost = ({ isVisible, quotePost, onPress }: Props) => {
           placeholder={'Whats happening?'}
           placeholderTextColor={theme.colors.text.disabled}
           multiline
-          onChangeText={onChange}
-          value={text}
+          onChangeText={handleOnChangeText}
+          value={content}
         />
+        <ContentCount>
+          <TextCount>
+            {content.length}/{MAX_LENGTH}
+          </TextCount>
+        </ContentCount>
+
         {postParent && (
           <ContainerQuote>
-            <PostQuote post={postParent} />
+            <PostQuote post={postParent} modalRender />
           </ContainerQuote>
         )}
         <Footer>
-          <Button variant='secondary' onPress={onPress}>
+          <Button variant='secondary' onPress={onCancel}>
             <Text>Cancelar</Text>
           </Button>
           <Button variant='primary' onPress={onSubmit}>

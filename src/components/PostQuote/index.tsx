@@ -1,14 +1,50 @@
-import { PostParent } from '@services/client/types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ContainerQuote, ContainerUserName, TextName, TextUserName, Body } from './styles';
-const PostQuote = ({ post }: { post: PostParent }) => {
+import { PostQuoteData, PostQuoteProps } from './types';
+
+const PostQuote = ({ post, modalRender = false }: PostQuoteProps) => {
+  if (((post.isReposted && !post.postParent?.postParent) || !post.postParent) && !modalRender) {
+    return null;
+  }
+
+  const renderData = useMemo<PostQuoteData>(() => {
+    if (modalRender && !post.isReposted) {
+      return {
+        name: post.author.name,
+        userName: post.author.userName,
+        content: post.content
+      };
+    }
+    if (modalRender && post.isReposted && post.postParent) {
+      return {
+        name: post.postParent.author.name,
+        userName: post.postParent.author.userName,
+        content: post.postParent.content
+      };
+    }
+
+    if (post.postParent?.postParent) {
+      return {
+        name: post.postParent.postParent.author.name,
+        userName: post.postParent.postParent.author.userName,
+        content: post.postParent.postParent.content
+      };
+    }
+
+    return {
+      name: post.postParent?.author?.name || '',
+      userName: post.postParent?.author?.userName || '',
+      content: post.postParent?.content || ''
+    };
+  }, [post]);
+
   return (
     <ContainerQuote>
       <ContainerUserName>
-        <TextName>{post.author.name}</TextName>
-        <TextUserName>{post.author.userName}</TextUserName>
+        <TextName>{renderData.name}</TextName>
+        <TextUserName>{renderData.userName}</TextUserName>
       </ContainerUserName>
-      <Body>{post.content}</Body>
+      <Body>{renderData.content}</Body>
     </ContainerQuote>
   );
 };

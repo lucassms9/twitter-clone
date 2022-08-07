@@ -8,17 +8,12 @@ export interface Profile {
 }
 
 export type Author = Omit<Profile, 'joinedAt'>;
-export interface PostParent {
-  content: string;
-  author: Author;
-}
-
 export interface Post {
   id: string;
   content: string;
   author: Author;
   isReposted: boolean;
-  postParent?: PostParent;
+  postParent?: Post;
   createdAt: number;
 }
 
