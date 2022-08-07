@@ -15,7 +15,7 @@ import {
 } from './styles';
 
 import PostQuote from '@components/PostQuote';
-import { Post as IPost } from '@services/client/types';
+import { Post as IPost, PostType } from '@services/client/types';
 import { useOwnerPosts, usePostMutation } from '@services/client';
 import { useQueryClient } from '@tanstack/react-query';
 import useUser from '@store/user';
@@ -52,10 +52,11 @@ const Post = ({ post }: { post: IPost }) => {
       author: {
         ...user
       },
-      createdAt: getTime(new Date())
+      createdAt: getTime(new Date()),
+      type: PostType.RePost
     } as IPost;
 
-    if (post.isReposted) {
+    if (post.type === PostType.RePost) {
       body.postParent = post.postParent;
     } else {
       body.postParent = post;
@@ -64,7 +65,7 @@ const Post = ({ post }: { post: IPost }) => {
   }, [post, ownerPosts]);
 
   const headerContent = useMemo(() => {
-    if (post.isReposted && post.postParent) {
+    if (post.type === PostType.RePost && post.postParent) {
       return {
         name: post.postParent.author.name,
         userName: post.postParent.author.userName,
@@ -80,7 +81,7 @@ const Post = ({ post }: { post: IPost }) => {
 
   return (
     <Container>
-      {post.isReposted && (
+      {post.type === PostType.RePost && (
         <ContentRePost>
           <TextRepost>Reposted by {post.author.name}</TextRepost>
           <Icon name='share-2' size={14} />
@@ -92,7 +93,7 @@ const Post = ({ post }: { post: IPost }) => {
         <TextUserName>{headerContent.userName}</TextUserName>
       </ContainerUserName>
 
-      {post.isReposted && post.postParent && <Body>{post.postParent.content}</Body>}
+      {post.type === PostType.RePost && post.postParent && <Body>{post.postParent.content}</Body>}
       {post.content && <Body>{post.content}</Body>}
 
       <PostQuote post={post} />

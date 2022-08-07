@@ -8,6 +8,12 @@ export interface Profile {
 }
 
 export type Author = Omit<Profile, 'joinedAt'>;
+
+export enum PostType {
+  Post = 'Post',
+  RePost = 'RePost',
+  Quote = 'Quote'
+}
 export interface Post {
   id: string;
   content: string;
@@ -15,6 +21,7 @@ export interface Post {
   isReposted: boolean;
   postParent?: Post;
   createdAt: number;
+  type: PostType;
 }
 
 export type RawError = {

@@ -1,25 +1,38 @@
+import { PostType } from '@services/client/types';
 import React, { useMemo } from 'react';
 import { ContainerQuote, ContainerUserName, TextName, TextUserName, Body } from './styles';
 import { PostQuoteData, PostQuoteProps } from './types';
 
 const PostQuote = ({ post, modalRender = false }: PostQuoteProps) => {
-  if (((post.isReposted && !post.postParent?.postParent) || !post.postParent) && !modalRender) {
+  if (
+    ((post.type === PostType.RePost && !post.postParent?.postParent) || !post.postParent) &&
+    !modalRender
+  ) {
     return null;
   }
 
   const renderData = useMemo<PostQuoteData>(() => {
-    if (modalRender && !post.isReposted) {
+    if (modalRender && post.type !== PostType.RePost) {
       return {
         name: post.author.name,
         userName: post.author.userName,
         content: post.content
       };
     }
-    if (modalRender && post.isReposted && post.postParent) {
+    if (modalRender && post.type === PostType.RePost && post.postParent) {
       return {
         name: post.postParent.author.name,
         userName: post.postParent.author.userName,
         content: post.postParent.content
+      };
+    }
+
+    if (post.type === PostType.RePost && post.postParent?.type === PostType.Quote) {
+
+      return {
+        name: post.postParent?.postParent?.author.name || '',
+        userName: post.postParent?.postParent?.author.userName || '',
+        content: post.postParent?.postParent?.content || ''
       };
     }
 

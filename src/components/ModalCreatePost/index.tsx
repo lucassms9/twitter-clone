@@ -7,7 +7,7 @@ import useUser from '@store/user';
 import Modal from 'react-native-modal';
 import { useOwnerPosts, usePostMutation } from '@services/client';
 import { useQueryClient } from '@tanstack/react-query';
-import { Post } from '@services/client/types';
+import { Post, PostType } from '@services/client/types';
 import { Props } from './types';
 import {
   Container,
@@ -65,12 +65,14 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
       author: {
         ...user
       },
-      createdAt: getTime(new Date())
+      createdAt: getTime(new Date()),
+      type: PostType.Post
     } as Post;
     if (quotePost) {
       body.postParent = {
         ...quotePost
       };
+      body.type = PostType.Quote;
     }
 
     mutate(body);
