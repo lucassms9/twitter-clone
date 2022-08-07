@@ -1,3 +1,5 @@
+import { Author } from '@services/client/types';
+
 export type State = {
-    id: string;
+  user: Author;
 };
