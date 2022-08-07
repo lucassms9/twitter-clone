@@ -15,7 +15,7 @@ export const usePostMutation = (options?: UseMutationOptions<Post, Error, Post>)
 };
 
 export const usePosts = () => {
-  return useQuery<Post[], Error, Post>(['posts'], () =>
+  return useQuery<Post[], Error, Post[]>(['posts'], () =>
     api.get<Post[]>('/posts/?_sort=id&_order=desc').then((data) => data.data)
   );
 };
