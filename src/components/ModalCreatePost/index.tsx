@@ -21,10 +21,8 @@ import {
 } from './styles';
 import { theme } from '@styles/theme';
 import PostQuote from '@components/PostQuote';
-import { uuid } from '@utils';
-import { PostQuoteData } from '@components/PostQuote/types';
+import { LIMIT_POST, MAX_LENGTH, uuid } from '@utils';
 
-const MAX_LENGTH = 777;
 export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const focusRef = createRef<TextInput>();
   const [content, setContent] = useState('');
@@ -50,7 +48,7 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
         return isAfter(post.createdAt, today);
       }) || [];
 
-    if (postsCreateToday.length >= 5) {
+    if (postsCreateToday.length >= LIMIT_POST) {
       return Alert.alert('Alert!', 'You only can create 5 post per day');
     }
 

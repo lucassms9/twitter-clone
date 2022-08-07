@@ -21,7 +21,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import useUser from '@store/user';
 import ModalCreatePost from '@components/ModalCreatePost';
 import { getTime, isAfter, startOfToday } from 'date-fns';
-import { uuid } from '@utils';
+import { LIMIT_POST, uuid } from '@utils';
 import { Alert } from 'react-native';
 
 const Post = ({ post }: { post: IPost }) => {
@@ -42,7 +42,7 @@ const Post = ({ post }: { post: IPost }) => {
         return isAfter(post.createdAt, today);
       }) || [];
 
-    if (postsCreateToday.length >= 5) {
+    if (postsCreateToday.length >= LIMIT_POST) {
       return Alert.alert('Alert!', 'You only can create 5 post per day');
     }
     const body = {

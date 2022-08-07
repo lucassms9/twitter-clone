@@ -410,6 +410,78 @@
           }
         }
       }
+    },
+    {
+      "id": "1036a7a9-0e09-4eab-982f-c15bf0e0de31",
+      "content": "Create post from profile",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659900424770,
+      "type": "Post"
+    },
+    {
+      "id": "d8305a94-2a77-4de4-90dd-2b852dfa644b",
+      "isReposted": true,
+      "content": "",
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659900428887,
+      "type": "RePost",
+      "postParent": {
+        "id": "1036a7a9-0e09-4eab-982f-c15bf0e0de31",
+        "content": "Create post from profile",
+        "isReposted": false,
+        "author": {
+          "id": 3,
+          "name": "Lucas Mendonça",
+          "userName": "@lucassms9"
+        },
+        "createdAt": 1659900424770,
+        "type": "Post"
+      }
+    },
+    {
+      "id": "5609717a-52af-4454-8425-a6f2a8054b3e",
+      "content": "Teste quote",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659900435097,
+      "type": "Quote",
+      "postParent": {
+        "id": "d8305a94-2a77-4de4-90dd-2b852dfa644b",
+        "isReposted": true,
+        "content": "",
+        "author": {
+          "id": 3,
+          "name": "Lucas Mendonça",
+          "userName": "@lucassms9"
+        },
+        "createdAt": 1659900428887,
+        "type": "RePost",
+        "postParent": {
+          "id": "1036a7a9-0e09-4eab-982f-c15bf0e0de31",
+          "content": "Create post from profile",
+          "isReposted": false,
+          "author": {
+            "id": 3,
+            "name": "Lucas Mendonça",
+            "userName": "@lucassms9"
+          },
+          "createdAt": 1659900424770,
+          "type": "Post"
+        }
+      }
     }
   ],
   "profile": [

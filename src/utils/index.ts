@@ -1,3 +1,6 @@
+export const MAX_LENGTH = 777;
+export const LIMIT_POST = 50
+
 export const uuid = () => {
   let u = '',
     i = 0;
