@@ -16,16 +16,19 @@ import {
 
 import PostQuote from '@components/PostQuote';
 import { Post as IPost } from '@services/client/types';
-import { usePostMutation } from '@services/client';
+import { useOwnerPosts, usePostMutation } from '@services/client';
 import { useQueryClient } from '@tanstack/react-query';
 import useUser from '@store/user';
 import ModalCreatePost from '@components/ModalCreatePost';
+import { getTime, getUnixTime, isAfter, startOfToday } from 'date-fns';
+import { uuid } from '@utils';
+import { Alert } from 'react-native';
 
 const Post = ({ post }: { post: IPost }) => {
   const [showModal, setShowModal] = useState(false);
   const queryClient = useQueryClient();
   const user = useUser((state) => state.user);
-
+  const { data: ownerPosts } = useOwnerPosts(user.id);
   const { mutate } = usePostMutation({
     onSuccess: () => {
       queryClient.refetchQueries(['posts']);
@@ -33,11 +36,18 @@ const Post = ({ post }: { post: IPost }) => {
   });
 
   const repost = useCallback(() => {
-    const data = queryClient.getQueryData<IPost[]>(['posts']) || [];
-    const createId = data.length > 0 ? data[0].id + 1 : 1;
+    const postsCreateToday =
+      ownerPosts?.filter((post) => {
+        const today = startOfToday();
+        return isAfter(post.createdAt, today);
+      }) || [];
+
+    if (postsCreateToday.length > 5) {
+      return Alert.alert('Alert!', 'You only can create 5 post per day');
+    }
 
     mutate({
-      id: createId,
+      id: uuid(),
       isReposted: true,
       content: '',
       author: {
@@ -48,9 +58,10 @@ const Post = ({ post }: { post: IPost }) => {
         author: {
           ...post.author
         }
-      }
+      },
+      createdAt: getTime(new Date())
     });
-  }, [post]);
+  }, [post, ownerPosts]);
 
   const openModal = useCallback(() => {
     setShowModal(true);
@@ -102,7 +113,11 @@ const Post = ({ post }: { post: IPost }) => {
           <IconFooter name='edit' color={'#fff'} size={16} />
         </ItemFooter>
       </Footer>
-      <ModalCreatePost quotePost={post} isVisible={showModal} onPress={() => setShowModal((prev) => !prev)} />
+      <ModalCreatePost
+        quotePost={post}
+        isVisible={showModal}
+        onPress={() => setShowModal((prev) => !prev)}
+      />
     </Container>
   );
 };

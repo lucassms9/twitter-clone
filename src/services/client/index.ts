@@ -16,16 +16,14 @@ export const usePostMutation = (options?: UseMutationOptions<Post, Error, Post>)
 
 export const usePosts = () => {
   return useQuery<Post[], Error, Post[]>(['posts'], () =>
-    api.get<Post[]>('/posts/?_sort=id&_order=desc').then((data) => data.data)
+    api.get<Post[]>('/posts/?_sort=createdAt&_order=desc').then((data) => data.data)
   );
 };
 
-export const getOwnerPosts = async (id: string) => {
-  api.get('/post', {
-    params: {
-      'author.id': id
-    }
-  });
+export const useOwnerPosts = (id: number) => {
+  return useQuery<Post[], Error, Post[]>(['posts', 'user', id], () =>
+    api.get<Post[]>(`/posts/?author.id=${id}`).then((data) => data.data)
+  );
 };
 
 export const useProfile = (userId: number) => {

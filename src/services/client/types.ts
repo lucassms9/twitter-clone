@@ -14,11 +14,12 @@ export interface PostParent {
 }
 
 export interface Post {
-  id: number;
+  id: string;
   content: string;
   author: Author;
   isReposted: boolean;
   postParent?: PostParent;
+  createdAt: number;
 }
 
 export type RawError = {
