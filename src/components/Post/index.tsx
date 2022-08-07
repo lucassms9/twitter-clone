@@ -42,7 +42,7 @@ const Post = ({ post }: { post: IPost }) => {
         return isAfter(post.createdAt, today);
       }) || [];
 
-    if (postsCreateToday.length > 5) {
+    if (postsCreateToday.length >= 5) {
       return Alert.alert('Alert!', 'You only can create 5 post per day');
     }
     const body = {

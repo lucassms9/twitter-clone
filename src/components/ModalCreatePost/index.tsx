@@ -1,7 +1,7 @@
 import { Text } from '@components/Post/styles';
 import React, { createRef, useCallback, useEffect, useMemo, useState } from 'react';
-import { isAfter, startOfToday, getUnixTime, getTime } from 'date-fns';
-import { Alert, ScrollView, TextInput, View } from 'react-native';
+import { isAfter, startOfToday, getTime } from 'date-fns';
+import { Alert, TextInput, View } from 'react-native';
 import useUser from '@store/user';
 
 import Modal from 'react-native-modal';
@@ -50,7 +50,7 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
         return isAfter(post.createdAt, today);
       }) || [];
 
-    if (postsCreateToday.length > 5) {
+    if (postsCreateToday.length >= 5) {
       return Alert.alert('Alert!', 'You only can create 5 post per day');
     }
 
@@ -75,10 +75,6 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
 
     mutate(body);
   }, [content, queryClient]);
-
-  const postParent = useMemo(() => {
-    return quotePost || ({} as Post);
-  }, [quotePost]);
 
   const onCancel = useCallback(() => {
     onClose();
@@ -114,9 +110,9 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
           </TextCount>
         </ContentCount>
 
-        {postParent && (
+        {quotePost && (
           <ContainerQuote>
-            <PostQuote post={postParent} modalRender />
+            <PostQuote post={quotePost} modalRender />
           </ContainerQuote>
         )}
         <Footer>
