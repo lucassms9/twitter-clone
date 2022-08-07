@@ -1,10 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 
-import { Text, View } from 'react-native';
 import Post from '@components/Post';
 import { Container } from './styles';
-import useUser from '@store/user';
 import { usePosts } from '@services/client';
 import { Post as IPost } from '@services/client/types';
 import FloatingButton from '@components/FloatingButton';
@@ -19,7 +17,7 @@ const Home = () => {
     return <Post post={item} />;
   };
   const memoPosts = useMemo(() => {
-    return data || [] as IPost[];
+    return data || ([] as IPost[]);
   }, [data]);
 
   return (

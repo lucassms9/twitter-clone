@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   Container,
   ContainerUserName,
@@ -15,12 +15,43 @@ import {
 } from './styles';
 
 import PostQuote from '@components/PostQuote';
-import { Post as IPost } from '@services/client/types';
+import { Post as IPost, } from '@services/client/types';
+import { usePostMutation } from '@services/client';
+import { useQueryClient } from '@tanstack/react-query';
+import useUser from '@store/user';
 
 const Post = ({ post }: { post: IPost }) => {
-  
+  const queryClient = useQueryClient();
+  const user = useUser((state) => state.user);
+
+  const { mutate } = usePostMutation({
+    onSuccess: () => {
+      queryClient.refetchQueries(['posts']);
+    }
+  });
+
+  const repost = useCallback(() => {
+    const data = queryClient.getQueryData<IPost[]>(['posts']) || [];
+    const createId = data.length > 0 ? data[0].id + 1 : 1;
+
+    mutate({
+      id: createId,
+      isReposted: true,
+      content: '',
+      author: {
+        ...user
+      },
+      postParent: {
+        content: post.content,
+        author: {
+          ...post.author
+        }
+      }
+    });
+  }, [post]);
+
   const headerContent = useMemo(() => {
-    if (post.isReposted) {
+    if (post.isReposted && post.postParent) {
       return {
         name: post.postParent.author.name,
         userName: post.postParent.author.userName
@@ -46,13 +77,13 @@ const Post = ({ post }: { post: IPost }) => {
         <TextUserName>{headerContent.userName}</TextUserName>
       </ContainerUserName>
 
-      {post.isReposted && <Body>{post.postParent.content}</Body>}
+      {post.isReposted && post.postParent && <Body>{post.postParent.content}</Body>}
       {post.content && <Body>{post.content}</Body>}
 
       {post.postParent && !post.isReposted && <PostQuote post={post.postParent} />}
 
       <Footer>
-        <ItemFooter marginRight={20}>
+        <ItemFooter marginRight={20} onPress={repost}>
           <Text>Repost</Text>
           <IconFooter name='share-2' color={'#fff'} size={16} />
         </ItemFooter>

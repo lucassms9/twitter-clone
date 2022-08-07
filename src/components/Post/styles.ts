@@ -21,7 +21,7 @@ export const Footer = styled.View`
   justify-content: flex-end;
   margin-top: 12px;
 `;
-export const ItemFooter = styled.View<{ marginRight?: number }>`
+export const ItemFooter = styled.TouchableOpacity<{ marginRight?: number }>`
   flex-direction: row;
   margin-right: ${({ marginRight }) => (marginRight ? `${marginRight}px` : '0px')};
 `;
