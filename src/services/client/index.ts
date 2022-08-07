@@ -22,7 +22,7 @@ export const usePosts = () => {
 
 export const useOwnerPosts = (id: number) => {
   return useQuery<Post[], Error, Post[]>(['posts', 'user', id], () =>
-    api.get<Post[]>(`/posts/?author.id=${id}`).then((data) => data.data)
+    api.get<Post[]>(`/posts/?author.id=${id}&_sort=createdAt&_order=desc`).then((data) => data.data)
   );
 };
 
