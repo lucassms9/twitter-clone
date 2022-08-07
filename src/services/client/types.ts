@@ -7,7 +7,7 @@ export interface Profile {
   userName: string;
 }
 
-type Author = Omit<Profile, 'joinedAt'>;
+export type Author = Omit<Profile, 'joinedAt'>;
 export interface PostParent {
   content: string;
   author: Author;
@@ -18,7 +18,7 @@ export interface Post {
   content: string;
   author: Author;
   isReposted: boolean;
-  postParent: PostParent;
+  postParent?: PostParent;
 }
 
 export type RawError = {

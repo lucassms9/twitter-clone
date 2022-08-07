@@ -1,17 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, UseMutationOptions, useQuery } from '@tanstack/react-query';
 
 import api from '@services/api';
 
 import { Profile, Post, Error } from './types';
 
+export const usePostMutation = (options?: UseMutationOptions<Post, Error, Post>) => {
+  return useMutation((param: Post) => {
+    return api
+      .post<Post>('/posts', {
+        ...param
+      })
+      .then((data) => data.data);
+  }, options);
+};
+
 export const usePosts = () => {
-  return useQuery<Post[], Error, Post[]>(
-    ['posts'],
-    () => api.get<Post[]>('/posts/').then((data) => data.data),
-    {
-      cacheTime: 0,
-      staleTime: Infinity,
-    }
+  return useQuery<Post[], Error, Post>(['posts'], () =>
+    api.get<Post[]>('/posts/?_sort=id&_order=desc').then((data) => data.data)
   );
 };
 
