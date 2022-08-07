@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
-  max-height: 400px;
-  min-height: 200px;
+  max-height: 500px;
   border-radius: 12px;
+  padding-right: 12px;
 `;
 
 export const Title = styled.Text`
@@ -16,19 +16,18 @@ export const Title = styled.Text`
 `;
 
 export const Input = styled.TextInput`
-  flex: 1;
   background-color: ${({ theme }) => theme.colors.background};
   color: ${({ theme }) => theme.colors.text.primary};
   padding: 16px;
   font-size: 14px;
+  height: 80px;
 `;
 
 export const Footer = styled.View`
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  margin-right: 12px;
-  margin-bottom: 12px;
+  margin: 12px 0px;
 `;
 
 export const Button = styled.TouchableOpacity<{ variant: string }>`
@@ -40,4 +39,8 @@ export const Button = styled.TouchableOpacity<{ variant: string }>`
   align-items: center;
   justify-content: center;
   margin-right: ${({ variant }) => (variant !== 'primary' ? '12px' : '0px')}; ;
+`;
+
+export const ContainerQuote = styled.ScrollView`
+  max-height: 300px;
 `;

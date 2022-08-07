@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   Container,
   ContainerUserName,
@@ -15,12 +15,14 @@ import {
 } from './styles';
 
 import PostQuote from '@components/PostQuote';
-import { Post as IPost, } from '@services/client/types';
+import { Post as IPost } from '@services/client/types';
 import { usePostMutation } from '@services/client';
 import { useQueryClient } from '@tanstack/react-query';
 import useUser from '@store/user';
+import ModalCreatePost from '@components/ModalCreatePost';
 
 const Post = ({ post }: { post: IPost }) => {
+  const [showModal, setShowModal] = useState(false);
   const queryClient = useQueryClient();
   const user = useUser((state) => state.user);
 
@@ -48,6 +50,14 @@ const Post = ({ post }: { post: IPost }) => {
         }
       }
     });
+  }, [post]);
+
+  const openModal = useCallback(() => {
+    setShowModal(true);
+  }, [setShowModal]);
+
+  const quotePost = useCallback(() => {
+    setShowModal(false);
   }, [post]);
 
   const headerContent = useMemo(() => {
@@ -87,11 +97,12 @@ const Post = ({ post }: { post: IPost }) => {
           <Text>Repost</Text>
           <IconFooter name='share-2' color={'#fff'} size={16} />
         </ItemFooter>
-        <ItemFooter style={{ flexDirection: 'row' }}>
+        <ItemFooter onPress={() => setShowModal((prev) => !prev)}>
           <Text>Quote-post</Text>
           <IconFooter name='edit' color={'#fff'} size={16} />
         </ItemFooter>
       </Footer>
+      <ModalCreatePost quotePost={post} isVisible={showModal} onPress={() => setShowModal((prev) => !prev)} />
     </Container>
   );
 };
