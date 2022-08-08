@@ -4,6 +4,7 @@
     "jsx": "react-native",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     /* Module Resolution Options */
     "moduleResolution": "node",
     "baseUrl": "./",
@@ -16,6 +17,7 @@
       "@services/*": ["src/services/*"],
       "@store/*": ["src/store/*"],
       "@utils": ["src/utils/index.ts"],
+      "@tests/*": ["__tests__/*"]
     }
   },
 

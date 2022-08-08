@@ -11,7 +11,8 @@ module.exports = {
           '@components': './src/components',
           '@store': './src/store',
           '@services': './src/services',
-          '@utils': './src/utils'
+          '@utils': './src/utils',
+          '@tests': './__tests__'
         }
       }
     ]

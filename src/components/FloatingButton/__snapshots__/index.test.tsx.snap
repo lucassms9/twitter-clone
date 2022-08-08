@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Floating Button component should render with success 1`] = `
+<View
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#1d9bf0",
+      "borderRadius": 35,
+      "bottom": 25,
+      "height": 70,
+      "justifyContent": "center",
+      "opacity": 1,
+      "position": "absolute",
+      "right": 25,
+      "width": 70,
+    }
+  }
+  testID="FloatingButton"
+>
+  <Icon
+    name="edit"
+    size={25}
+    style={
+      Array [
+        Object {
+          "color": "#fff",
+        },
+      ]
+    }
+  />
+</View>
+`;
