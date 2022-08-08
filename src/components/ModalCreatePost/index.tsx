@@ -22,7 +22,7 @@ import {
 import { theme } from '@styles/theme';
 import PostQuote from '@components/PostQuote';
 import { LIMIT_POST, MAX_LENGTH, uuid } from '@utils';
-import { createUsePostsKey } from '@services/client/keys';
+import { createUseOwnerPostsKey, createUsePostsKey } from '@services/client/keys';
 
 export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const focusRef = createRef<TextInput>();
@@ -33,6 +33,12 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const { mutate } = usePostMutation({
     onSuccess: (data) => {
       queryClient.setQueryData<Post[] | undefined>(createUsePostsKey(), (snapshot) => {
+        if (snapshot) {
+          return [data, ...snapshot];
+        }
+      });
+
+      queryClient.setQueryData<Post[] | undefined>(createUseOwnerPostsKey(user.id), (snapshot) => {
         if (snapshot) {
           return [data, ...snapshot];
         }
