@@ -1,4 +1,4 @@
-# Posterr
+# Posterr - Lucas Santos Mendonça da Silva
 
 > This project is a social network like Twitter, created with a focus in process of interview at strider using React Native.
 
@@ -36,6 +36,11 @@ or
 ```
 yarn android 
 ```
+
+Running the tests:
+```
+yarn test 
+```
 ### Aditional
 
 The data about user logged in app is stored  `src/store/index.tsx`.
@@ -53,4 +58,5 @@ for exemple:
 - [ ] implement design system to ensure standard and documentation of components on the platform, we could use StoryBook for example
 - [ ] implement code push to improve ci/cd flow and quick fixes in the app once published in stores
 - [ ] implement ci/cd using appcenter or bitrise for example
+- [ ] create more test from screen and components
 
