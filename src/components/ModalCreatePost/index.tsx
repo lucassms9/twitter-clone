@@ -31,9 +31,14 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const queryClient = useQueryClient();
   const { data: ownerPosts } = useOwnerPosts(user.id);
   const { mutate } = usePostMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.setQueryData<Post[] | undefined>(createUsePostsKey(), (snapshot) => {
+        if (snapshot) {
+          return [data, ...snapshot];
+        }
+      });
+
       onClose();
-      queryClient.refetchQueries(createUsePostsKey());
       setContent('');
     }
   });

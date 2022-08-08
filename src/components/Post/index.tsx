@@ -31,8 +31,12 @@ const Post = ({ post }: { post: IPost }) => {
   const user = useUser((state) => state.user);
   const { data: ownerPosts } = useOwnerPosts(user.id);
   const { mutate } = usePostMutation({
-    onSuccess: () => {
-      queryClient.refetchQueries(createUsePostsKey());
+    onSuccess: (data) => {
+      queryClient.setQueryData<IPost[] | undefined>(createUsePostsKey(), (snapshot) => {
+        if (snapshot) {
+          return [data, ...snapshot];
+        }
+      });
     }
   });
 
