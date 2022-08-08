@@ -22,6 +22,7 @@ import {
 import { theme } from '@styles/theme';
 import PostQuote from '@components/PostQuote';
 import { LIMIT_POST, MAX_LENGTH, uuid } from '@utils';
+import { createUsePostsKey } from '@services/client/keys';
 
 export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const focusRef = createRef<TextInput>();
@@ -32,7 +33,7 @@ export const ModalCreatePost = ({ isVisible, quotePost, onClose }: Props) => {
   const { mutate } = usePostMutation({
     onSuccess: () => {
       onClose();
-      queryClient.refetchQueries(['posts']);
+      queryClient.refetchQueries(createUsePostsKey());
       setContent('');
     }
   });

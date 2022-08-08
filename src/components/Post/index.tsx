@@ -23,6 +23,7 @@ import ModalCreatePost from '@components/ModalCreatePost';
 import { getTime, isAfter, startOfToday } from 'date-fns';
 import { LIMIT_POST, uuid } from '@utils';
 import { Alert } from 'react-native';
+import { createUsePostsKey } from '@services/client/keys';
 
 const Post = ({ post }: { post: IPost }) => {
   const [showModal, setShowModal] = useState(false);
@@ -31,7 +32,7 @@ const Post = ({ post }: { post: IPost }) => {
   const { data: ownerPosts } = useOwnerPosts(user.id);
   const { mutate } = usePostMutation({
     onSuccess: () => {
-      queryClient.refetchQueries(['posts']);
+      queryClient.refetchQueries(createUsePostsKey());
     }
   });
 
