@@ -638,6 +638,113 @@
       },
       "createdAt": 1659967259251,
       "type": "Post"
+    },
+    {
+      "id": "432d3a87-82c8-4987-b896-f549884d406a",
+      "content": "My post",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659977406433,
+      "type": "Post"
+    },
+    {
+      "id": "ec38bb84-4fbc-4be0-b00a-3c3fe9768950",
+      "content": "Teste post",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659977493881,
+      "type": "Post"
+    },
+    {
+      "id": "6c5d2d8d-5574-4625-9c7d-0a4622039cee",
+      "isReposted": true,
+      "content": "",
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659977513024,
+      "type": "RePost",
+      "postParent": {
+        "id": "a482831d-3c92-41ba-b6c0-1356ca2b8da3",
+        "content": "123",
+        "isReposted": false,
+        "author": {
+          "id": 3,
+          "name": "Lucas Mendonça",
+          "userName": "@lucassms9"
+        },
+        "createdAt": 1659899165366,
+        "type": "Quote",
+        "postParent": {
+          "id": "9243af4e-8840-4b6e-a5bf-42c72db211c6",
+          "content": "Test quote",
+          "isReposted": false,
+          "author": {
+            "id": 3,
+            "name": "Lucas Mendonça",
+            "userName": "@lucassms9"
+          },
+          "createdAt": 1659898819713,
+          "type": "Quote",
+          "postParent": {
+            "id": 1,
+            "content": "my first post at posterr!!!",
+            "author": {
+              "id": 1,
+              "name": "Joao Silva",
+              "userName": "@joao123"
+            },
+            "isReposted": false,
+            "createdAt": 1659886706634
+          }
+        }
+      }
+    },
+    {
+      "id": "15a277fb-9015-4a88-b560-1207434ee115",
+      "content": "Quote post test",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659977526552,
+      "type": "Quote",
+      "postParent": {
+        "id": "ec38bb84-4fbc-4be0-b00a-3c3fe9768950",
+        "content": "Teste post",
+        "isReposted": false,
+        "author": {
+          "id": 3,
+          "name": "Lucas Mendonça",
+          "userName": "@lucassms9"
+        },
+        "createdAt": 1659977493881,
+        "type": "Post"
+      }
+    },
+    {
+      "id": "2179e919-9a36-4018-bad9-12db49917122",
+      "content": "New post",
+      "isReposted": false,
+      "author": {
+        "id": 3,
+        "name": "Lucas Mendonça",
+        "userName": "@lucassms9"
+      },
+      "createdAt": 1659977568972,
+      "type": "Post"
     }
   ],
   "profile": [
